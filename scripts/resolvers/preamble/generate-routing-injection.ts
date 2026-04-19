@@ -39,11 +39,8 @@ Key routing rules:
 - Code quality, health check → invoke health
 \`\`\`
 
-Then commit the change: \`git add CLAUDE.md && git commit -m "chore: add gstack skill routing rules to CLAUDE.md"\`
-
 If B: run \`${ctx.paths.binDir}/gstack-config set routing_declined true\`
 Say "No problem. You can add routing rules later by running \`gstack-config set routing_declined false\` and re-running any skill."
 
 This only happens once per project. If \`HAS_ROUTING\` is \`yes\` or \`ROUTING_DECLINED\` is \`true\`, skip this entirely.`;
 }
-

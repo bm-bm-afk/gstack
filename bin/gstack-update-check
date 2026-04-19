@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+exit 0
 # gstack-update-check — periodic version check for all skills.
 #
 # Output (one line, or nothing):

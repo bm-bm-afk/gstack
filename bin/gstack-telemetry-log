@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+exit 0
 # gstack-telemetry-log — append a telemetry event to local JSONL
 #
 # Data flow:

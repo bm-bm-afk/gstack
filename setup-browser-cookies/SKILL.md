@@ -19,6 +19,10 @@ allowed-tools:
 <!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->
 <!-- Regenerate: bun run gen:skill-docs -->
 
+**DISABLED FOR SECURITY** — This skill has been disabled in this fork.
+It reads cookie databases from your real browsers which is a security risk.
+To re-enable, remove this notice.
+
 ## Preamble (run first)
 
 ```bash
