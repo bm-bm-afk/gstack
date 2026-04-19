@@ -271,7 +271,7 @@ if [ "$NEEDS_BUILD" -eq 1 ]; then
     if ! command -v gtimeout >/dev/null 2>&1 && ! command -v timeout >/dev/null 2>&1; then
       if command -v brew >/dev/null 2>&1; then
         log "Installing coreutils for Codex hang protection (set GSTACK_SKIP_COREUTILS=1 to skip)..."
-        brew install coreutils >/dev/null 2>&1 || log "warning: brew install coreutils failed; /codex will run without hang protection"
+        # brew install coreutils >/dev/null 2>&1 || log "warning: brew install coreutils failed; /codex will run without hang protection"
       else
         log "warning: Homebrew not found. /codex will run without hang protection. Install coreutils manually or set GSTACK_SKIP_COREUTILS=1."
       fi
@@ -323,11 +323,17 @@ fi
 
 # 2. Ensure Playwright's Chromium is available
 if ! ensure_playwright_browser; then
-  echo "Installing Playwright Chromium..."
-  (
-    cd "$SOURCE_GSTACK_DIR"
-    bunx playwright install chromium
-  )
+  echo "Playwright Chromium needs to be installed. Install now? (y/n)"
+  read -r REPLY
+  if [ "$REPLY" != "y" ]; then
+    echo "Skipping Playwright. /browse will not work."
+  else
+    echo "Installing Playwright Chromium..."
+    (
+      cd "$SOURCE_GSTACK_DIR"
+      bunx playwright install chromium
+    )
+  fi
 
   if [ "$IS_WINDOWS" -eq 1 ]; then
     # On Windows, Node.js launches Chromium (not Bun — see oven-sh/bun#4253).
@@ -341,11 +347,11 @@ if ! ensure_playwright_browser; then
     (
       cd "$SOURCE_GSTACK_DIR"
       # Bun's node_modules already has playwright; verify Node can require it
-      node -e "require('playwright')" 2>/dev/null || npm install --no-save playwright
+      # node -e "require('playwright')" 2>/dev/null || npm install --no-save playwright
       # @ngrok/ngrok is externalized in server-node.mjs and resolved at runtime.
       # Verify the platform-specific native binary is installed so /pair-agent
       # tunnels don't fail later with a cryptic module-not-found error.
-      node -e "require('@ngrok/ngrok')" 2>/dev/null || npm install --no-save @ngrok/ngrok
+      # node -e "require('@ngrok/ngrok')" 2>/dev/null || npm install --no-save @ngrok/ngrok
     )
   fi
 fi

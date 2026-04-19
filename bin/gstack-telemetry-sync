@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+exit 0
 # gstack-telemetry-sync — sync local JSONL events to Supabase
 #
 # Fire-and-forget, backgrounded, rate-limited to once per 5 minutes.

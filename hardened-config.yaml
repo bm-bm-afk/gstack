@@ -1,0 +1,5 @@
+# Hardened gstack config — copy to ~/.gstack/config.yaml after install
+telemetry: off
+update_check: false
+proactive: true
+routing_declined: true
